@@ -663,22 +663,22 @@ MoveTiro_Desenha:
 
 Delay:
 						;Utiliza Push e Pop para nao afetar os Ristradores do programa principal
-	Push R0
-	Push R1
+	push R0
+	push R1
 	
-	Loadn R1, #5  ; a
-   Delay_volta2:				;Quebrou o contador acima em duas partes (dois loops de decremento)
-	Loadn R0, #3000	; b
-   Delay_volta: 
-	Dec R0					; (4*a + 6)b = 1000000  == 1 seg  em um clock de 1MHz
-	JNZ Delay_volta	
-	Dec R1
-	JNZ Delay_volta2
+	loadn r1, #5  				; a
+   	Delay_volta2:				;Quebrou o contador acima em duas partes (dois loops de decremento)
+	loadn r0, #3000				; b
+   	Delay_volta: 
+	dec r0						; (4*a + 6)b = 1000000  == 1 seg  em um clock de 1MHz
+	jnz Delay_volta	
+	dec r1
+	jnz Delay_volta2
 	
-	Pop R1
-	Pop R0
+	pop R1
+	pop R0
 	
-	RTS							;return
+	rts							;return
 
 ;-------------------------------
 
@@ -763,8 +763,8 @@ ImprimeStr:	;  Rotina de Impresao de Mensagens:    r0 = Posicao da tela que o pr
 ;********************************************************	
 
 ImprimeTela2: 	;  Rotina de Impresao de Cenario na Tela Inteira
-		;  r1 = endereco onde comeca a primeira linha do Cenario
-		;  r2 = cor do Cenario para ser impresso
+				;  r1 = endereco onde comeca a primeira linha do Cenario
+				;  r2 = cor do Cenario para ser impresso
 
 	push r0	; protege o r3 na pilha para ser usado na subrotina
 	push r1	; protege o r1 na pilha para preservar seu valor
@@ -782,10 +782,10 @@ ImprimeTela2: 	;  Rotina de Impresao de Cenario na Tela Inteira
 	
    ImprimeTela2_Loop:
 		call ImprimeStr2
-		add r0, r0, r3  	; incrementaposicao para a segunda linha na tela -->  r0 = R0 + 40
-		add r1, r1, r4  	; incrementa o ponteiro para o comeco da proxima linha na memoria (40 + 1 porcausa do /0 !!) --> r1 = r1 + 41
-		add r6, r6, r4  	; incrementa o ponteiro para o comeco da proxima linha na memoria (40 + 1 porcausa do /0 !!) --> r1 = r1 + 41
-		cmp r0, r5			; Compara r0 com 1200
+		add r0, r0, r3  		; incrementaposicao para a segunda linha na tela -->  r0 = R0 + 40
+		add r1, r1, r4  		; incrementa o ponteiro para o comeco da proxima linha na memoria (40 + 1 porcausa do /0 !!) --> r1 = r1 + 41
+		add r6, r6, r4  		; incrementa o ponteiro para o comeco da proxima linha na memoria (40 + 1 porcausa do /0 !!) --> r1 = r1 + 41
+		cmp r0, r5				; Compara r0 com 1200
 		jne ImprimeTela2_Loop	; Enquanto r0 < 1200
 
 	pop r6	; Resgata os valores dos registradores utilizados na Subrotina da Pilha
@@ -930,10 +930,10 @@ tela1Linha4  : string "                                        "
 tela1Linha5  : string "                                        "
 tela1Linha6  : string "                                        "
 tela1Linha7  : string "                                        "
-tela1Linha8  : string "                        @@@@            "
-tela1Linha9  : string "                      @@@@@@@@@@        "
-tela1Linha10 : string "                       @@@@@@@@@@@@     "
-tela1Linha11 : string "                         @@@            "
+tela1Linha8  : string "                                        "
+tela1Linha9  : string "                                        "
+tela1Linha10 : string "                                        "
+tela1Linha11 : string "                                        "
 tela1Linha12 : string "                                        "
 tela1Linha13 : string "                                        "
 tela1Linha14 : string "                                        "
@@ -973,31 +973,31 @@ tela2Linha13 : string "                                        "
 tela2Linha14 : string "                                        "
 tela2Linha15 : string "                                        "
 tela2Linha16 : string "                                        "
-tela2Linha17 : string "                     :  :               "
-tela2Linha18 : string "          :  :     :      :             "
-tela2Linha19 : string "       :       : :          :           "
-tela2Linha20 : string "     :        :    :         :          "
-tela2Linha21 : string "            :         :                 "
-tela2Linha22 : string "          :             :               "
-tela2Linha23 : string "         :                :             "
-tela2Linha24 : string "         :                 :            "
-tela2Linha25 : string "          :               :             "
+tela2Linha17 : string "                                        "
+tela2Linha18 : string "                                        "
+tela2Linha19 : string "                                        "
+tela2Linha20 : string "                                        "
+tela2Linha21 : string "                                        "
+tela2Linha22 : string "                                        "
+tela2Linha23 : string "                                        "
+tela2Linha24 : string "                                        "
+tela2Linha25 : string "                                        "
 tela2Linha26 : string "                                        "
 tela2Linha27 : string "                                        "
 tela2Linha28 : string "                                        "
-tela2Linha29 : string "                                        "
+tela2Linha29 : string "                                     END"
 
 
 ; Declara e preenche tela linha por linha (40 caracteres):
-tela3Linha0  : string "                                        "
-tela3Linha1  : string "                                        "
-tela3Linha2  : string "                                        "
+tela3Linha0  : string "   |                                    "
+tela3Linha1  : string "   |                                    "
+tela3Linha2  : string "___|                                    "
 tela3Linha3  : string "                                        "
-tela3Linha4  : string "    .  |  .                             "
-tela3Linha5  : string "      OOO                               "
-tela3Linha6  : string "   - OOOOO -                            "
-tela3Linha7  : string "      OOO                               "
-tela3Linha8  : string "    .  |  .                             "
+tela3Linha4  : string "                                        "
+tela3Linha5  : string "                                        "
+tela3Linha6  : string "                                        "
+tela3Linha7  : string "                                        "
+tela3Linha8  : string "                                        "
 tela3Linha9  : string "                                        "
 tela3Linha10 : string "                                        "
 tela3Linha11 : string "                                        "
@@ -1009,46 +1009,46 @@ tela3Linha16 : string "                                        "
 tela3Linha17 : string "                                        "
 tela3Linha18 : string "                                        "
 tela3Linha19 : string "                                        "
-tela3Linha20 : string "                **                      "
+tela3Linha20 : string "                                        "
 tela3Linha21 : string "                                        "
 tela3Linha22 : string "                                        "
 tela3Linha23 : string "                                        "
 tela3Linha24 : string "                                        "
 tela3Linha25 : string "                                        "
-tela3Linha26 : string "                                        "
-tela3Linha27 : string "                                        "
-tela3Linha28 : string "                                        "
-tela3Linha29 : string "                                        "
+tela3Linha26 : string "                                     ___"
+tela3Linha27 : string "                                    |   "
+tela3Linha28 : string "                                    |   "
+tela3Linha29 : string "                                    |   "
 
 
-
-tela4Linha0  : string "                                        "
-tela4Linha1  : string "                                        "
-tela4Linha2  : string "                                        "
-tela4Linha3  : string "                                        "
-tela4Linha4  : string "                                        "
-tela4Linha5  : string "                                        "
-tela4Linha6  : string "                                        "
-tela4Linha7  : string "                                        "
-tela4Linha8  : string "                                        "
-tela4Linha9  : string "                                        "
-tela4Linha10 : string "                                        "
-tela4Linha11 : string "                                        "
-tela4Linha12 : string "                                        "
-tela4Linha13 : string "                                        "
-tela4Linha14 : string "                                        "
-tela4Linha15 : string "                                        "
-tela4Linha16 : string "                                        "
-tela4Linha17 : string "                                        "
-tela4Linha18 : string "                                        "
-tela4Linha19 : string "                                        "
-tela4Linha20 : string "                                        "
-tela4Linha21 : string "                 ..                     "
-tela4Linha22 : string "                  ..                    "
-tela4Linha23 : string "                   ..                   "
-tela4Linha24 : string "                   ..                   "
-tela4Linha25 : string "                  ...                   "
-tela4Linha26 : string "                 ...                    "
-tela4Linha27 : string "                ...                     "
-tela4Linha28 : string "               ....                     "
-tela4Linha29 : string "              .....                     "
+; Declara e preenche tela linha por linha (40 caracteres):
+tela4Linha0  : string "      **********************************"
+tela4Linha1  : string "      *                                *"
+tela4Linha2  : string "      *                                *"
+tela4Linha3  : string "      *                                *"
+tela4Linha4  : string "                                       *"
+tela4Linha5  : string "****                                   *"
+tela4Linha6  : string "*                                      *"
+tela4Linha7  : string "*                                      *"
+tela4Linha8  : string "*          ******************          *"
+tela4Linha9  : string "*          ******************          *"
+tela4Linha10 : string "*    ***                        ***    *"
+tela4Linha11 : string "*    ***                        ***    *"
+tela4Linha12 : string "*    ***                        ***    *"
+tela4Linha13 : string "*    ***       **********       ***    *"
+tela4Linha14 : string "*    ***       **********       ***    *"
+tela4Linha15 : string "*    ***       **********       ***    *"
+tela4Linha16 : string "*    ***                        ***    *"
+tela4Linha17 : string "*    ***                        ***    *"
+tela4Linha18 : string "*    ***                        ***    *"
+tela4Linha19 : string "*          ******************          *"
+tela4Linha20 : string "*          ******************          *"
+tela4Linha21 : string "*                                      *"
+tela4Linha22 : string "*                                      *"
+tela4Linha23 : string "*                                      *"
+tela4Linha24 : string "*                                    ***"
+tela4Linha25 : string "*                                       "
+tela4Linha26 : string "*                                *      "
+tela4Linha27 : string "*                                *      "
+tela4Linha28 : string "*                                *      "
+tela4Linha29 : string "**********************************      "
