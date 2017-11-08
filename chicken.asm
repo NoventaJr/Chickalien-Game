@@ -1,46 +1,3 @@
-;Nave : 
-;	- Move 3 Objetos com Delays diferentes
-;	- Nao apaga o cenario
-;	- Le teclado para movimentar a Nave
-;	- Declara Tabela de nr. Randoicos
-;	- Le Tabela de nr. Randomico para movimentar o Alien
-;	- Se Tiro ou Alien passar por cima, nao apaga a Nave
-;	- Nao fica piscando, pois so' redezenha se pos != posAnt
-;   - Senario Colorido!!!!!
-;	- Loop principal segue estrutura abaixo:
-
-
-;	Loop:
-;		if (mod(c/10)==0
-;			{	
-;				RecalculaNave (posNave = Teclado...)
-;				If (posNave != posAntNave)
-;				{ 	ApagaNave: Print Tela(posAntNave + posAntNave/40) , posAntNave
-;				 	DesenhaNave  (posAntNave = posNave)
-;				}
-;			}
-;		if (mod(c/5)==0
-;			{	
-;				RecalculaAlien (posAlien = Rand...)
-;				If (posAlien != posAntAlien)
-;				{ 	ApagaAlien: Print Tela(posAntAlien + posAntAlien/40) , posAntAlien
-;				 	DesenhaAlien  (posAntAlien = posAlien)
-;				}
-;			}
-;		if (mod(c/2)==0
-;			{	
-;				RecalculaTiro (posTiro = posTiro + IncTiro...)
-;				If (posTiro != posAntTiro)
-;				{ 	ApagaTiro: Print Tela(posAntTiro + posAntTiro/40) , posAntTiro
-;				 	DesenhaTiro  (posAntTiro = posTiro)
-;				}
-;			}
-;		
-;		Delay
-;		c++
-;		goto Loop
-
-
 jmp main
 Win: string "V O C E   C H E G O U"
 Dead: string "V O C E   M O R R E U"
@@ -70,10 +27,6 @@ dirAlien4: var #1
 posAlien5: var #1		; Contem a posicao atual do Alien
 posAntAlien5: var #1		; Contem a posicao anterior do Alien
 dirAlien5: var #1
-
-posTiro: var #1			; Contem a posicao atual do Tiro
-posAntTiro: var #1		; Contem a posicao anterior do Tiro
-FlagTiro: var #1		; Flag para ver se Atirou ou nao (Barra de Espaco!!)
 
 IncRand: var #1			; Incremento para circular na Tabela de nr. Randomicos
 Rand : var #30			; Tabela de nr. Randomicos entre 0 - 7
@@ -132,42 +85,33 @@ main:
 	store posNave, r0		; Zera Posicao Atual da Nave
 	store posAntNave, r0	; Zera Posicao Anterior da Nave
 	
-	store FlagTiro, r0		; Zera o Flag para marcar que ainda nao Atirou!
-	store posTiro, r0		; Zera Posicao Atual do Tiro
-	store posAntTiro, r0	; Zera Posicao Anterior do Tiro
-	
 	Loadn r0, #48
 	store posAlien, r0		; Zera Posicao Atual do Alien
 	store posAntAlien, r0	; Zera Posicao Anterior do Alien
-	
 	loadn r0, #1
 	store dirAlien, r0		; Alien começa indo pra baixo
 	
 	Loadn r0, #842
 	store posAlien2, R0		; Zera Posicao Atual do Alien
 	store posAntAlien2, R0	; Zera Posicao Anterior do Alien
-	
 	loadn r0, #2
 	store dirAlien2, r0		; Alien começa indo pra direita
 	
 	Loadn r0, #1151
 	store posAlien3, r0		; Zera Posicao Atual do Alien
 	store posAntAlien3, r0	; Zera Posicao Anterior do Alien
-	
 	loadn r0, #3
 	store dirAlien3, r0		; Alien começa indo pra cima
 	
 	Loadn r0, #357
 	store posAlien4, r0		; Zera Posicao Atual do Alien
 	store posAntAlien4, r0	; Zera Posicao Anterior do Alien
-	
 	loadn r0, #0
 	store dirAlien4, r0		; Alien começa indo pra esquerda
 	
-	Loadn r0, #466
+	Loadn r0, #746
 	store posAlien5, r0		; Zera Posicao Atual do Alien
 	store posAntAlien5, r0	; Zera Posicao Anterior do Alien
-	
 	loadn r0, #0
 	store dirAlien5, r0		; Alien começa indo pra esquerda
 	
@@ -205,11 +149,11 @@ main:
 		mod R1, R0, R1
 		cmp R1, R2		; if (mod(c/30)==0
 		ceq MoveAlien5	; Chama Rotina de movimentacao do Alien
-	
-		loadn R1, #2
+		
+		loadn R1, #30
 		mod R1, R0, R1
-		cmp R1, R2		; if (mod(c/2)==0
-		ceq MoveTiro	; Chama Rotina de movimentacao do Tiro
+		cmp R1, R2		; if (mod(c/30)==0
+		call ChecaPos	; Chama Rotina de movimentacao do Alien
 	
 		call Delay
 		inc R0 	;c++
@@ -296,10 +240,6 @@ MoveNave_RecalculaPos:		; Recalcula posicao da Nave em funcao das Teclas pressio
 	cmp R1, R2
 	jeq MoveNave_RecalculaPos_S
 	
-	loadn R2, #' '
-	cmp R1, R2
-	jeq MoveNave_RecalculaPos_Tiro
-	
   MoveNave_RecalculaPos_Fim:	; Se nao for nenhuma tecla valida, vai embora
 	store posNave, R0
 	pop R3
@@ -341,11 +281,6 @@ MoveNave_RecalculaPos:		; Recalcula posicao da Nave em funcao das Teclas pressio
 	add R0, R0, R1	; pos = pos + 40
 	jmp MoveNave_RecalculaPos_Fim	
 	
-  MoveNave_RecalculaPos_Tiro:	
-	loadn R1, #1			; Se Atirou:
-	store FlagTiro, R1		; FlagTiro = 1
-	store posTiro, R0		; posTiro = posNave
-	jmp MoveNave_RecalculaPos_Fim	
 ;----------------------------------
 MoveNave_Desenha:	; Desenha caractere da Nave
 	push R0
@@ -1019,39 +954,39 @@ MoveAlien5_RecalculaPos:
  MoveAlien5_Esquerda:
  	loadn r2, #0	;se dir = 0
 	cmp r1, r2
-	jne MoveAlien5_Cima
+	jne MoveAlien5_Baixo
 	loadn r1, #1
 	sub r0, r0, r1
-	loadn r1, #453
+	loadn r1, #733
 	cmp r0, r1
 	jne MoveAlien5_FimSwitch	; Break do Switch
-	loadn r1, #1
+	loadn r1, #3
 	store dirAlien5, r1
 	jmp MoveAlien5_FimSwitch
 	
  MoveAlien5_Baixo:
  	loadn r2, #1	;se dir = 1
 	cmp r1, r2
-	jne MoveAlien5_Esquerda
+	jne MoveAlien5_Direita
 	loadn r1, #40
 	add r0, r0, r1
-	loadn r1, #733
+	loadn r1, #746
 	cmp r0, r1
 	jne MoveAlien5_FimSwitch	; Break do Switch
-	loadn r1, #2
+	loadn r1, #0
 	store dirAlien5, r1
 	jmp MoveAlien5_FimSwitch
 	
  MoveAlien5_Direita:
  	loadn r2, #2	;se dir = 2
 	cmp r1, r2
-	jne MoveAlien5_Baixo
+	jne MoveAlien5_Cima
 	loadn r1, #1
 	add r0, r0, r1
-	loadn r1, #746
+	loadn r1, #466
 	cmp r0, r1
 	jne MoveAlien5_FimSwitch	; Break do Switch
-	loadn r1, #3
+	loadn r1, #1
 	store dirAlien5, r1
 	jmp MoveAlien5_FimSwitch
 	
@@ -1061,10 +996,10 @@ MoveAlien5_RecalculaPos:
 	jne MoveAlien5_FimSwitch
 	loadn r1, #40
 	sub r0, r0, r1
-	loadn r1, #466
+	loadn r1, #453
 	cmp r0, r1
 	jne MoveAlien5_FimSwitch	; Break do Switch
-	loadn r1, #0
+	loadn r1, #2
 	store dirAlien5, r1
 
   MoveAlien5_FimSwitch:	
@@ -1094,108 +1029,40 @@ MoveAlien5_Desenha:
 ;----------------------------------
 ;--------------------------
 
-MoveTiro:
-	push r0
-	push r1
-	
-	call MoveTiro_RecalculaPos
 
-; So' Apaga e Redezenha se (pos != posAnt)
-;	If (pos != posAnt)	{	
-	load r0, posTiro
-	load r1, posAntTiro
-	cmp r0, r1
-	jeq MoveTiro_Skip
-		call MoveTiro_Apaga
-		call MoveTiro_Desenha		;}
-  MoveTiro_Skip:
-	
-	pop r1
-	pop r0
-	rts
 
-;-----------------------------
-	
-MoveTiro_Apaga:
-	push R0
-	push R1
-	push R2
-	push R3
-	push R4
-	push R5
-
-	; Compara Se (posAntTiro == posAntNave)
-	load R0, posAntTiro	; R0 = posAnt
-	load R1, posAntNave	; R1 = posAnt
-	cmp r0, r1
-	jne MoveTiro_Apaga_Skip1
-		loadn r5, #'X'		; Se o Tiro passa sobre a Nave, apaga com um X, senao apaga com o cenario 
-		jmp MoveTiro_Apaga_Fim
-		
-  MoveTiro_Apaga_Skip1:	
-	; --> R2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
-	loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
-	add R2, R1, r0	; R2 = Tela1Linha0 + posAnt
-	loadn R4, #40
-	div R3, R0, R4	; R3 = posAnt/40
-	add R2, R2, R3	; R2 = Tela1Linha0 + posAnt + posAnt/40
-	
-	loadi R5, R2	; R5 = Char (Tela(posAnt))
-
-  MoveTiro_Apaga_Fim:	
-	outchar R5, R0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
-	
-	pop R5
-	pop R4
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
-;----------------------------------	
-	
-	
-; if TiroFlag = 1
-;	posTiro++
-;	
-	
-MoveTiro_RecalculaPos:
+ChecaPos:
 	push R0
 	push R1
 	push R2
 	
-	load R1, FlagTiro	; Se Atirou, movimenta o tiro!
-	loadn R2, #1
-	cmp R1, R2			; If FlagTiro == 1  Movimenta o Tiro
-	jne MoveTiro_RecalculaPos_Fim2	; Se nao vai embora!
-	
-	load R0, posTiro	; TEsta se o Tiro Pegou no Alien
+	load R0, posNave	; TEsta se o Tiro Pegou no Alien
 	load R1, posAlien
 	cmp R0, R1			; IF posTiro == posAlien  BOOM!!
-	jeq MoveTiro_RecalculaPos_Boom
+	jeq ColisaoNave
 	
-	loadn R1, #40		; Testa condicoes de Contorno 
-	loadn R2, #39
-	mod R1, R0, R1		
-	cmp R1, R2			; Se tiro chegou na ultima linha
-	jne MoveTiro_RecalculaPos_Fim
-	call MoveTiro_Apaga
-	loadn R0, #0
-	store FlagTiro, R0	; Zera FlagTiro
-	store posTiro, R0	; Zera e iguala posTiro e posAntTiro
-	store posAntTiro, R0
-	jmp MoveTiro_RecalculaPos_Fim2	
+	load R1, posAlien2
+	cmp R0, R1			; IF posTiro == posAlien  BOOM!!
+	jeq ColisaoNave
 	
-  MoveTiro_RecalculaPos_Fim:
-	inc R0
-	store posTiro, R0
-  MoveTiro_RecalculaPos_Fim2:	
-	pop R2
-	pop R1
-	pop R0
-	rts
+	load R1, posAlien3
+	cmp R0, R1			; IF posTiro == posAlien  BOOM!!
+	jeq ColisaoNave
+	
+	load R1, posAlien4
+	cmp R0, R1			; IF posTiro == posAlien  BOOM!!
+	jeq ColisaoNave
+	
+	load R1, posAlien5
+	cmp R0, R1			; IF posTiro == posAlien  BOOM!!
+	jeq ColisaoNave
+	
+	loadn r1, #1199
+	cmp r0, r1
+	jeq Vitoria 
+	jmp FimChecagem
 
-  MoveTiro_RecalculaPos_Boom:	
+Vitoria:
 	; Limpa a Tela !!
   	loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
 	loadn R2, #0  			; cor branca!
@@ -1217,37 +1084,50 @@ MoveTiro_RecalculaPos:
 	loadn r0, #'s'
 	load r1, Letra
 	cmp r0, r1				; tecla == 's' ?
-	jne MoveTiro_RecalculaPos_FimJogo	; tecla nao e' 's'
+	jne FimJogo	; tecla nao e' 's'
 	
 	; Se quiser jogar novamente...
 	call ApagaTela
+	jmp main
+
+  ColisaoNave:	
+	; Limpa a Tela !!
+  	loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+	loadn R2, #0  			; cor branca!
+	call ImprimeTela   		;  Rotina de Impresao de Cenario na Tela Inteira
+  
+	;imprime Voce Venceu !!!
+	loadn r0, #526
+	loadn r1, #Dead
+	loadn r2, #0
+	call ImprimeStr
 	
+	;imprime quer jogar novamente
+	loadn r0, #605
+	loadn r1, #Msg
+	loadn r2, #0
+	call ImprimeStr
+	
+	call DigLetra
+	loadn r0, #'s'
+	load r1, Letra
+	cmp r0, r1				; tecla == 's' ?
+	jne FimJogo	; tecla nao e' 's'
+	
+	; Se quiser jogar novamente...
+	call ApagaTela
+	jmp main
+	
+FimChecagem:
 	pop r2
 	pop r1
 	pop r0
 
-	pop r0	; Da um Pop a mais para acertar o ponteiro da pilha, pois nao vai dar o RTS !!
-	jmp main
-
-  MoveTiro_RecalculaPos_FimJogo:
-	call ApagaTela
-	halt
-
-;----------------------------------
-MoveTiro_Desenha:
-	push R0
-	push R1
-	
-	Loadn R1, #'-'	; Tiro
-	load R0, posTiro
-	outchar R1, R0
-	store posAntTiro, R0
-	
-	pop R1
-	pop R0
 	rts
 
-;----------------------------------
+ FimJogo:
+	call ApagaTela
+	halt
 
 ;********************************************************
 ;                       DELAY
