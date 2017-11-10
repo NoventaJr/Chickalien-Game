@@ -3,7 +3,7 @@ Win: string "V O C E   C H E G O U"
 Dead: string "V O C E   M O R R E U"
 Msg: string "Quer jogar novamente? <s/n>"
 
-Letra: var #1		; Contem a letra que foi digitada
+Letra: var #1			; Contem a letra que foi digitada
 
 posNave: var #1			; Contem a posicao atual da Nave
 posAntNave: var #1		; Contem a posicao anterior da Nave
@@ -17,99 +17,99 @@ posAntAlien2: var #1	; Contem a posicao anterior do Alien
 dirAlien2: var #1
 
 posAlien3: var #1		; Contem a posicao atual do Alien
-posAntAlien3: var #1		; Contem a posicao anterior do Alien
+posAntAlien3: var #1	; Contem a posicao anterior do Alien
 dirAlien3: var #1
 
 posAlien4: var #1		; Contem a posicao atual do Alien
-posAntAlien4: var #1		; Contem a posicao anterior do Alien
+posAntAlien4: var #1	; Contem a posicao anterior do Alien
 dirAlien4: var #1
 
 posAlien5: var #1		; Contem a posicao atual do Alien
-posAntAlien5: var #1		; Contem a posicao anterior do Alien
+posAntAlien5: var #1	; Contem a posicao anterior do Alien
 dirAlien5: var #1
 
-IncRand: var #1			; Incremento para circular na Tabela de nr. Randomicos
-Rand : var #30			; Tabela de nr. Randomicos entre 0 - 7
-	static Rand + #0, #0
-	static Rand + #1, #3
-	static Rand + #2, #7
-	static Rand + #3, #1
-	static Rand + #4, #6
-	static Rand + #5, #2
-	static Rand + #6, #7
-	static Rand + #7, #2
-	static Rand + #8, #0
-	static Rand + #9, #5
-	static Rand + #10, #7
-	static Rand + #11, #2
-	static Rand + #12, #0
-	static Rand + #13, #2
-	static Rand + #14, #7
-	static Rand + #15, #5
-	static Rand + #16, #5
-	static Rand + #17, #6
-	static Rand + #18, #7
-	static Rand + #19, #2
-	static Rand + #20, #0
-	static Rand + #20, #7
-	static Rand + #21, #1
-	static Rand + #22, #5
-	static Rand + #23, #6
-	static Rand + #24, #6
-	static Rand + #25, #7
-	static Rand + #26, #0
-	static Rand + #27, #3
-	static Rand + #28, #1
-	static Rand + #29, #1
+Incrand: var #1			; Incremento para circular na Tabela de nr. randomicos
+rand : var #30			; Tabela de nr. randomicos entre 0 - 7
+	static rand + #0, #0
+	static rand + #1, #3
+	static rand + #2, #7
+	static rand + #3, #1
+	static rand + #4, #6
+	static rand + #5, #2
+	static rand + #6, #7
+	static rand + #7, #2
+	static rand + #8, #0
+	static rand + #9, #5
+	static rand + #10, #7
+	static rand + #11, #2
+	static rand + #12, #0
+	static rand + #13, #2
+	static rand + #14, #7
+	static rand + #15, #5
+	static rand + #16, #5
+	static rand + #17, #6
+	static rand + #18, #7
+	static rand + #19, #2
+	static rand + #20, #0
+	static rand + #20, #7
+	static rand + #21, #1
+	static rand + #22, #5
+	static rand + #23, #6
+	static rand + #24, #6
+	static rand + #25, #7
+	static rand + #26, #0
+	static rand + #27, #3
+	static rand + #28, #1
+	static rand + #29, #1
 
 ;Codigo principal
 main:
 	call ApagaTela
-	loadn r1, #tela1Linha0	; Endereco onde comeca a primeira linha do cenario!!
+	loadn r1, #tela1Linha0		; Endereco onde comeca a primeira linha do cenario!!
 	loadn r2, #1536  			; cor branca!
-	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
+	call ImprimeTela2   		;  rotina de Impresao de Cenario na Tela Inteira
     
-	loadn r1, #tela2Linha0	; Endereco onde comeca a primeira linha do cenario!!
+	loadn r1, #tela2Linha0		; Endereco onde comeca a primeira linha do cenario!!
 	loadn r2, #512  			; cor branca!
-	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
+	call ImprimeTela2   		;  rotina de Impresao de Cenario na Tela Inteira
     
-	loadn r1, #tela3Linha0	; Endereco onde comeca a primeira linha do cenario!!
+	loadn r1, #tela3Linha0		; Endereco onde comeca a primeira linha do cenario!!
 	loadn r2, #2816   			; cor branca!
-	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
+	call ImprimeTela2   		;  rotina de Impresao de Cenario na Tela Inteira
 
-	loadn r1, #tela4Linha0	; Endereco onde comeca a primeira linha do cenario!!
+	loadn r1, #tela4Linha0		; Endereco onde comeca a primeira linha do cenario!!
 	loadn r2, #256   			; cor branca!
-	call ImprimeTela2   		;  Rotina de Impresao de Cenario na Tela Inteira
+	call ImprimeTela2   		;  rotina de Impresao de Cenario na Tela Inteira
 
 	Loadn r0, #0			
-	store posNave, r0		; Zera Posicao Atual da Nave
+	store posNave, r0		; Zera Posicao Atual da Nave (dentro do GO)
 	store posAntNave, r0	; Zera Posicao Anterior da Nave
 	
-	Loadn r0, #48
+	Loadn r0, #48			; Alien de cima
 	store posAlien, r0		; Zera Posicao Atual do Alien
 	store posAntAlien, r0	; Zera Posicao Anterior do Alien
 	loadn r0, #1
 	store dirAlien, r0		; Alien começa indo pra baixo
 	
-	Loadn r0, #842
-	store posAlien2, R0		; Zera Posicao Atual do Alien
-	store posAntAlien2, R0	; Zera Posicao Anterior do Alien
+	Loadn r0, #842			; Alien da esquerda
+	store posAlien2, r0		; Zera Posicao Atual do Alien
+	store posAntAlien2, r0	; Zera Posicao Anterior do Alien
 	loadn r0, #2
 	store dirAlien2, r0		; Alien começa indo pra direita
 	
-	Loadn r0, #1151
+	Loadn r0, #1151			; Alien de baixo
 	store posAlien3, r0		; Zera Posicao Atual do Alien
 	store posAntAlien3, r0	; Zera Posicao Anterior do Alien
 	loadn r0, #3
 	store dirAlien3, r0		; Alien começa indo pra cima
 	
-	Loadn r0, #357
+	Loadn r0, #357			; Alien da direita
 	store posAlien4, r0		; Zera Posicao Atual do Alien
 	store posAntAlien4, r0	; Zera Posicao Anterior do Alien
 	loadn r0, #0
 	store dirAlien4, r0		; Alien começa indo pra esquerda
 	
-	Loadn r0, #746
+	Loadn r0, #746			; Alien do meio
 	store posAlien5, r0		; Zera Posicao Atual do Alien
 	store posAntAlien5, r0	; Zera Posicao Anterior do Alien
 	loadn r0, #0
@@ -120,338 +120,342 @@ main:
 
 	Loop:
 	
-		loadn R1, #10
-		mod R1, R0, R1
-		cmp R1, R2		; if (mod(c/10)==0
-		ceq MoveNave	; Chama Rotina de movimentacao da Nave
+		loadn r1, #10
+		mod r1, r0, r1
+		cmp r1, r2		; if (mod(c/10)==0
+		ceq MoveNave	; Chama rotina de movimentacao da Nave
 	
-		loadn R1, #30
-		mod R1, R0, R1
-		cmp R1, R2		; if (mod(c/30)==0
-		ceq MoveAlien	; Chama Rotina de movimentacao do Alien
+		loadn r1, #15
+		mod r1, r0, r1
+		cmp r1, r2		; if (mod(c/30)==0
+		ceq MoveAlien	; Chama rotina de movimentacao do Alien 
 		
-		loadn R1, #30
-		mod R1, R0, R1
-		cmp R1, R2		; if (mod(c/30)==0
-		ceq MoveAlien2	; Chama Rotina de movimentacao do Alien
+		loadn r1, #15
+		mod r1, r0, r1
+		cmp r1, r2		; if (mod(c/30)==0
+		ceq MoveAlien2	; Chama rotina de movimentacao do Alien 2
 		
-		loadn R1, #30
-		mod R1, R0, R1
-		cmp R1, R2		; if (mod(c/30)==0
-		ceq MoveAlien3	; Chama Rotina de movimentacao do Alien
+		loadn r1, #15
+		mod r1, r0, r1
+		cmp r1, r2		; if (mod(c/30)==0
+		ceq MoveAlien3	; Chama rotina de movimentacao do Alien 3
 		
-		loadn R1, #30
-		mod R1, R0, R1
-		cmp R1, R2		; if (mod(c/30)==0
-		ceq MoveAlien4	; Chama Rotina de movimentacao do Alien
+		loadn r1, #15
+		mod r1, r0, r1
+		cmp r1, r2		; if (mod(c/30)==0
+		ceq MoveAlien4	; Chama rotina de movimentacao do Alien 4
 		
-		loadn R1, #30
-		mod R1, R0, R1
-		cmp R1, R2		; if (mod(c/30)==0
-		ceq MoveAlien5	; Chama Rotina de movimentacao do Alien
+		loadn r1, #15
+		mod r1, r0, r1
+		cmp r1, r2		; if (mod(c/30)==0
+		ceq MoveAlien5	; Chama rotina de movimentacao do Alien 5
 		
-		loadn R1, #30
-		mod R1, R0, R1
-		cmp R1, R2		; if (mod(c/30)==0
-		call ChecaPos	; Chama Rotina de movimentacao do Alien
+		loadn r1, #15
+		mod r1, r0, r1
+		cmp r1, r2		; if (mod(c/30)==0
+		call ChecaPos	; Chama rotina de verificacao de colisao
 	
 		call Delay
-		inc R0 	;c++
+		inc r0 	;c++
 		jmp Loop
 	
 ;Funcoes
 ;--------------------------
+;-----------NAVE-----------
+;--------------------------
 
 MoveNave:
+		push r0
+		push r1
+		
+		call MoveNave_recalculaPos		; recalcula Posicao da Nave
+
+		; So Apaga e redesenha se (pos != posAnt)
+		; if (posNave != posAntNave)	{	
+		load r0, posNave
+		load r1, posAntNave
+		cmp r0, r1
+		jeq MoveNave_Skip
+			call MoveNave_Apaga
+			call MoveNave_Desenha		;}
+	  	MoveNave_Skip:
+		
+		pop r1
+		pop r0
+		rts
+		
+;------------------------
+		
+MoveNave_Apaga:		; Apaga a Nave preservando o Cenario!
+	push r0
+	push r1
+	push r2
+	push r3
+	push r4
+	push r5
+
+	load r0, posAntNave	; r0 = posAnt
+	
+	; --> r2 = Tela1Linha0 + posAnt + posAnt/40  
+	; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
+
+	loadn r1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+	add r2, r1, r0			; r2 = Tela1Linha0 + posAnt
+	loadn r4, #40
+	div r3, r0, r4			; r3 = posAnt/40
+	add r2, r2, r3			; r2 = Tela1Linha0 + posAnt + posAnt/40
+	
+	loadi r5, r2			; r5 = Char (Tela(posAnt))
+	
+	outchar r5, r0			; Apaga o Obj na tela com o Char correspondente na memoria do cenario
+	
+	pop r5
+	pop r4
+	pop r3
+	pop r2
+	pop r1
+	pop r0
+	rts
+	
+;--------------------------
+		
+MoveNave_recalculaPos:		; recalcula posicao da Nave em funcao das Teclas pressionadas
+	push r0
+	push r1
+	push r2
+	push r3
+
+	load r0, posNave
+	
+	inchar r1				; Le Teclado para controlar a Nave
+	loadn r2, #'a'
+	cmp r1, r2
+	jeq MoveNave_recalculaPos_A
+	
+	loadn r2, #'d'
+	cmp r1, r2
+	jeq MoveNave_recalculaPos_D
+		
+	loadn r2, #'w'
+	cmp r1, r2
+	jeq MoveNave_recalculaPos_W
+		
+	loadn r2, #'s'
+	cmp r1, r2
+	jeq MoveNave_recalculaPos_S
+	
+  	MoveNave_recalculaPos_Fim:	; Se nao for nenhuma tecla valida, vai embora
+		store posNave, r0
+		pop r3
+		pop r2
+		pop r1
+		pop r0
+		rts
+
+  	MoveNave_recalculaPos_A:	; Move Nave para Esquerda
+		loadn r1, #40
+		loadn r2, #0
+		mod r1, r0, r1	; Testa condicoes de Contorno 
+		cmp r1, r2
+		jeq MoveNave_recalculaPos_Fim
+		dec r0			; pos = pos -1
+		jmp MoveNave_recalculaPos_Fim
+		
+  	MoveNave_recalculaPos_D:	; Move Nave para Direita	
+		loadn r1, #40
+		loadn r2, #39
+		mod r1, r0, r1	; Testa condicoes de Contorno 
+		cmp r1, r2
+		jeq MoveNave_recalculaPos_Fim
+		inc r0			; pos = pos + 1
+		jmp MoveNave_recalculaPos_Fim
+	
+  	MoveNave_recalculaPos_W:	; Move Nave para Cima
+		loadn r1, #40
+		cmp r0, r1		; Testa condicoes de Contorno 
+		jle MoveNave_recalculaPos_Fim
+		sub r0, r0, r1	; pos = pos - 40
+		jmp MoveNave_recalculaPos_Fim
+
+  	MoveNave_recalculaPos_S:	; Move Nave para Baixo
+		loadn r1, #1159
+		cmp r0, r1		; Testa condicoes de Contorno 
+		jgr MoveNave_recalculaPos_Fim
+		loadn r1, #40
+		add r0, r0, r1	; pos = pos + 40
+		jmp MoveNave_recalculaPos_Fim	
+
+MoveNave_Desenha:	; Desenha caractere da Nave
 	push r0
 	push r1
 	
-	call MoveNave_RecalculaPos		; Recalcula Posicao da Nave
-
-; So' Apaga e Redezenha se (pos != posAnt)
-;	If (posNave != posAntNave)	{	
+	Loadn r1, #'X'	; Nave
 	load r0, posNave
-	load r1, posAntNave
-	cmp r0, r1
-	jeq MoveNave_Skip
-		call MoveNave_Apaga
-		call MoveNave_Desenha		;}
-  MoveNave_Skip:
+	outchar r1, r0
+	store posAntNave, r0	; Atualiza Posicao Anterior da Nave = Posicao Atual
 	
 	pop r1
 	pop r0
 	rts
 
-;--------------------------------
-	
-MoveNave_Apaga:		; Apaga a Nave preservando o Cenario!
-	push R0
-	push R1
-	push R2
-	push R3
-	push R4
-	push R5
-
-	load R0, posAntNave	; R0 = posAnt
-	
-	; --> R2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
-
-	loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
-	add R2, R1, r0	; R2 = Tela1Linha0 + posAnt
-	loadn R4, #40
-	div R3, R0, R4	; R3 = posAnt/40
-	add R2, R2, R3	; R2 = Tela1Linha0 + posAnt + posAnt/40
-	
-	loadi R5, R2	; R5 = Char (Tela(posAnt))
-	
-	outchar R5, R0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
-	
-	pop R5
-	pop R4
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
-;----------------------------------	
-	
-MoveNave_RecalculaPos:		; Recalcula posicao da Nave em funcao das Teclas pressionadas
-	push R0
-	push R1
-	push R2
-	push R3
-
-	load R0, posNave
-	
-	inchar R1				; Le Teclado para controlar a Nave
-	loadn R2, #'a'
-	cmp R1, R2
-	jeq MoveNave_RecalculaPos_A
-	
-	loadn R2, #'d'
-	cmp R1, R2
-	jeq MoveNave_RecalculaPos_D
-		
-	loadn R2, #'w'
-	cmp R1, R2
-	jeq MoveNave_RecalculaPos_W
-		
-	loadn R2, #'s'
-	cmp R1, R2
-	jeq MoveNave_RecalculaPos_S
-	
-  MoveNave_RecalculaPos_Fim:	; Se nao for nenhuma tecla valida, vai embora
-	store posNave, R0
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
-
-  MoveNave_RecalculaPos_A:	; Move Nave para Esquerda
-	loadn R1, #40
-	loadn R2, #0
-	mod R1, R0, R1		; Testa condicoes de Contorno 
-	cmp R1, R2
-	jeq MoveNave_RecalculaPos_Fim
-	dec R0	; pos = pos -1
-	jmp MoveNave_RecalculaPos_Fim
-		
-  MoveNave_RecalculaPos_D:	; Move Nave para Direita	
-	loadn R1, #40
-	loadn R2, #39
-	mod R1, R0, R1		; Testa condicoes de Contorno 
-	cmp R1, R2
-	jeq MoveNave_RecalculaPos_Fim
-	inc R0	; pos = pos + 1
-	jmp MoveNave_RecalculaPos_Fim
-	
-  MoveNave_RecalculaPos_W:	; Move Nave para Cima
-	loadn R1, #40
-	cmp R0, R1		; Testa condicoes de Contorno 
-	jle MoveNave_RecalculaPos_Fim
-	sub R0, R0, R1	; pos = pos - 40
-	jmp MoveNave_RecalculaPos_Fim
-
-  MoveNave_RecalculaPos_S:	; Move Nave para Baixo
-	loadn R1, #1159
-	cmp R0, R1		; Testa condicoes de Contorno 
-	jgr MoveNave_RecalculaPos_Fim
-	loadn R1, #40
-	add R0, R0, R1	; pos = pos + 40
-	jmp MoveNave_RecalculaPos_Fim	
-	
 ;----------------------------------
-MoveNave_Desenha:	; Desenha caractere da Nave
-	push R0
-	push R1
-	
-	Loadn R1, #'X'	; Nave
-	load R0, posNave
-	outchar R1, R0
-	store posAntNave, R0	; Atualiza Posicao Anterior da Nave = Posicao Atual
-	
-	pop R1
-	pop R0
-	rts
-
-;----------------------------------
-;----------------------------------
+;--------------ALIEN----------------
 ;----------------------------------
 
 MoveAlien:
 	push r0
 	push r1
 	
-	call MoveAlien_RecalculaPos
+	call MoveAlien_recalculaPos
 	
-; So' Apaga e Redezenha se (pos != posAnt)
-;	If (pos != posAnt)	{	
+	; So Apaga e redesenha se (pos != posAnt)
+	; if (pos != posAnt)	{	
 	load r0, posAlien
 	load r1, posAntAlien
 	cmp r0, r1
 	jeq MoveAlien_Skip
 		call MoveAlien_Apaga
 		call MoveAlien_Desenha		;}
-  MoveAlien_Skip:
+  	MoveAlien_Skip:
 	
 	pop r1
 	pop r0
 	rts
-		
+			
 ; ----------------------------
-		
+			
 MoveAlien_Apaga:
-	push R0
-	push R1
-	push R2
-	push R3
-	push R4
-	push R5
+	push r0
+	push r1
+	push r2
+	push r3
+	push r4
+	push r5
 
-	load R0, posAntAlien	; R0 == posAnt
-	load R1, posAntNave 	; R1 = posAnt
+	load r0, posAntAlien	; r0 == posAnt
+	load r1, posAntNave 	; r1 = posAnt
 	cmp r0, r1
 	jne MoveAlien_Apaga_Skip
 		loadn r5, #'X'		; Se o Tiro passa sobre a Nave, apaga com um X, senao apaga com o cenario 
 		jmp MoveAlien_Apaga_Fim
 
-  MoveAlien_Apaga_Skip:	
-  
-	; --> R2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
-	loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
-	add R2, R1, r0	; R2 = Tela1Linha0 + posAnt
-	loadn R4, #40
-	div R3, R0, R4	; R3 = posAnt/40
-	add R2, R2, R3	; R2 = Tela1Linha0 + posAnt + posAnt/40
-	
-	loadi R5, R2	; R5 = Char (Tela(posAnt))
-  
-  MoveAlien_Apaga_Fim:	
-	outchar R5, R0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
-	
-	pop R5
-	pop R4
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
+	MoveAlien_Apaga_Skip:	
+	  
+		; --> r2 = Tela1Linha0 + posAnt + posAnt/40  
+		; tem que somar posAnt/40 no ponteiro pois as linhas da string terminam com /0 !!
+		loadn r1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+		add r2, r1, r0	; r2 = Tela1Linha0 + posAnt
+		loadn r4, #40
+		div r3, r0, r4	; r3 = posAnt/40
+		add r2, r2, r3	; r2 = Tela1Linha0 + posAnt + posAnt/40
+		
+		loadi r5, r2	; r5 = Char (Tela(posAnt))
+	  
+	  	MoveAlien_Apaga_Fim:	
+		outchar r5, r0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
+		
+		pop r5
+		pop r4
+		pop r3
+		pop r2
+		pop r1
+		pop r0
+		rts
 
-MoveAlien_RecalculaPos:
-	push r0
-	push r1
-	push r2
-	push r3
+	MoveAlien_recalculaPos:
+		push r0
+		push r1
+		push r2
+		push r3
 
-	load r0, posAlien
-	load r1, dirAlien
+		load r0, posAlien
+		load r1, dirAlien
 
- MoveAlien_Esquerda:
- 	loadn r2, #0	;se dir = 0
-	cmp r1, r2
-	jne MoveAlien_Baixo
-	loadn r1, #1
-	sub r0, r0, r1
-	loadn r1, #48
-	cmp r0, r1
-	jne MoveAlien_FimSwitch	; Break do Switch
-	loadn r1, #1
-	store dirAlien, r1
-	jmp MoveAlien_FimSwitch
-	
- MoveAlien_Baixo:
- 	loadn r2, #1	;se dir = 1
-	cmp r1, r2
-	jne MoveAlien_Direita
-	loadn r1, #40
-	add r0, r0, r1
-	loadn r1, #248
-	cmp r0, r1
-	jne MoveAlien_FimSwitch	; Break do Switch
-	loadn r1, #2
-	store dirAlien, r1
-	jmp MoveAlien_FimSwitch
-	
- MoveAlien_Direita:
- 	loadn r2, #2	;se dir = 2
-	cmp r1, r2
-	jne MoveAlien_Cima
-	loadn r1, #1
-	add r0, r0, r1
-	loadn r1, #275
-	cmp r0, r1
-	jne MoveAlien_FimSwitch	; Break do Switch
-	loadn r1, #3
-	store dirAlien, r1
-	jmp MoveAlien_FimSwitch
-	
- MoveAlien_Cima:
- 	loadn r2, #3	;se dir = 3
-	cmp r1, r2
-	jne MoveAlien_FimSwitch
-	loadn r1, #40
-	sub r0, r0, r1
-	loadn r1, #75
-	cmp r0, r1
-	jne MoveAlien_FimSwitch	; Break do Switch
-	loadn r1, #0
-	store dirAlien, r1
+		MoveAlien_Esquerda:
+		 	loadn r2, #0	;se dir = 0
+			cmp r1, r2
+			jne MoveAlien_Baixo
+			loadn r1, #1
+			sub r0, r0, r1
+			loadn r1, #48
+			cmp r0, r1
+			jne MoveAlien_FimSwitch	; Break do Switch
+			loadn r1, #1
+			store dirAlien, r1
+			jmp MoveAlien_FimSwitch
+		
+		MoveAlien_Baixo:
+		 	loadn r2, #1	;se dir = 1
+			cmp r1, r2
+			jne MoveAlien_Direita
+			loadn r1, #40
+			add r0, r0, r1
+			loadn r1, #248
+			cmp r0, r1
+			jne MoveAlien_FimSwitch	; Break do Switch
+			loadn r1, #2
+			store dirAlien, r1
+			jmp MoveAlien_FimSwitch
+		
+		MoveAlien_Direita:
+		 	loadn r2, #2	;se dir = 2
+			cmp r1, r2
+			jne MoveAlien_Cima
+			loadn r1, #1
+			add r0, r0, r1
+			loadn r1, #275
+			cmp r0, r1
+			jne MoveAlien_FimSwitch	; Break do Switch
+			loadn r1, #3
+			store dirAlien, r1
+			jmp MoveAlien_FimSwitch
+		
+	 	MoveAlien_Cima:
+		 	loadn r2, #3	;se dir = 3
+			cmp r1, r2
+			jne MoveAlien_FimSwitch
+			loadn r1, #40
+			sub r0, r0, r1
+			loadn r1, #75
+			cmp r0, r1
+			jne MoveAlien_FimSwitch	; Break do Switch
+			loadn r1, #0
+			store dirAlien, r1
 
-  MoveAlien_FimSwitch:	
-	store posAlien, R0	; Grava a posicao alterada na memoria
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
+	  	MoveAlien_FimSwitch:	
+			store posAlien, r0	; Grava a posicao alterada na memoria
+			pop r3
+			pop r2
+			pop r1
+			pop r0
+			rts
+			
+	;----------------------------------
 
+	MoveAlien_Desenha:
+		push r0
+		push r1
+		
+		Loadn r1, #'A'	; Alien
+		load r0, posAlien
+		outchar r1, r0
+		store posAntAlien, r0
+		
+		pop r1
+		pop r0
+		rts
 
 ;----------------------------------
-MoveAlien_Desenha:
-	push R0
-	push R1
-	
-	Loadn R1, #'A'	; Alien
-	load R0, posAlien
-	outchar R1, R0
-	store posAntAlien, R0
-	
-	pop R1
-	pop R0
-	rts
-
+;------------ALIEN 2---------------
 ;----------------------------------
-;----------------------------------
-;--------------------------
 
 MoveAlien2:
 	push r0
 	push r1
 	
-	call MoveAlien2_RecalculaPos
+	call MoveAlien2_recalculaPos
 	
-; So' Apaga e Redezenha se (pos != posAnt)
+; So' Apaga e redezenha se (pos != posAnt)
 ;	If (pos != posAnt)	{	
 	load r0, posAlien2
 	load r1, posAntAlien2
@@ -459,153 +463,153 @@ MoveAlien2:
 	jeq MoveAlien2_Skip
 		call MoveAlien2_Apaga
 		call MoveAlien2_Desenha		;}
-  MoveAlien2_Skip:
+	MoveAlien2_Skip:
 	
-	pop r1
-	pop r0
-	rts
+		pop r1
+		pop r0
+		rts
+			
+	; ----------------------------
+			
+	MoveAlien2_Apaga:
+		push r0
+		push r1
+		push r2
+		push r3
+		push r4
+		push r5
+
+		load r0, posAntAlien2	; r0 == posAnt
+		load r1, posAntNave		; r1 = posAnt
+		cmp r0, r1
+		jne MoveAlien2_Apaga_Skip
+			loadn r5, #'X'		; Se o Tiro passa sobre a Nave, apaga com um X, senao apaga com o cenario 
+			jmp MoveAlien2_Apaga_Fim
+
+	MoveAlien2_Apaga_Skip:	
+	  
+		; --> r2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
+		loadn r1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+		add r2, r1, r0	; r2 = Tela1Linha0 + posAnt
+		loadn r4, #40
+		div r3, r0, r4	; r3 = posAnt/40
+		add r2, r2, r3	; r2 = Tela1Linha0 + posAnt + posAnt/40
 		
-; ----------------------------
+		loadi r5, r2	; r5 = Char (Tela(posAnt))
+	  
+	MoveAlien2_Apaga_Fim:	
+		outchar r5, r0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
 		
-MoveAlien2_Apaga:
-	push R0
-	push R1
-	push R2
-	push R3
-	push R4
-	push R5
+		pop r5
+		pop r4
+		pop r3
+		pop r2
+		pop r1
+		pop r0
+		rts
 
-	load R0, posAntAlien2	; R0 == posAnt
-	load R1, posAntNave		; R1 = posAnt
-	cmp r0, r1
-	jne MoveAlien2_Apaga_Skip
-		loadn r5, #'X'		; Se o Tiro passa sobre a Nave, apaga com um X, senao apaga com o cenario 
-		jmp MoveAlien2_Apaga_Fim
+	MoveAlien2_recalculaPos:
+		push r0
+		push r1
+		push r2
+		push r3
 
-  MoveAlien2_Apaga_Skip:	
-  
-	; --> R2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
-	loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
-	add R2, R1, r0	; R2 = Tela1Linha0 + posAnt
-	loadn R4, #40
-	div R3, R0, R4	; R3 = posAnt/40
-	add R2, R2, R3	; R2 = Tela1Linha0 + posAnt + posAnt/40
+		load r0, posAlien2
+		load r1, dirAlien2
+
+	 	MoveAlien2_Esquerda:
+		 	loadn r2, #0	;se dir = 0
+			cmp r1, r2
+			jne MoveAlien2_Baixo
+			loadn r1, #1
+			sub r0, r0, r1
+			loadn r1, #322
+			cmp r0, r1
+			jne MoveAlien2_FimSwitch	; Break do Switch
+			loadn r1, #1
+			store dirAlien2, r1
+			jmp MoveAlien2_FimSwitch
+		
+	 	MoveAlien2_Baixo:
+		 	loadn r2, #1	;se dir = 1
+			cmp r1, r2
+			jne MoveAlien2_Direita
+			loadn r1, #40
+			add r0, r0, r1
+			loadn r1, #842
+			cmp r0, r1
+			jne MoveAlien2_FimSwitch	; Break do Switch
+			loadn r1, #2
+			store dirAlien2, r1
+			jmp MoveAlien2_FimSwitch
+		
+	 	MoveAlien2_Direita:
+		 	loadn r2, #2	;se dir = 2
+			cmp r1, r2
+			jne MoveAlien2_Cima
+			loadn r1, #1
+			add r0, r0, r1
+			loadn r1, #849
+			cmp r0, r1
+			jne MoveAlien2_FimSwitch	; Break do Switch
+			loadn r1, #3
+			store dirAlien2, r1
+			jmp MoveAlien2_FimSwitch
+		
+		MoveAlien2_Cima:
+		 	loadn r2, #3	;se dir = 3
+			cmp r1, r2
+			jne MoveAlien2_FimSwitch
+			loadn r1, #40
+			sub r0, r0, r1
+			loadn r1, #329
+			cmp r0, r1
+			jne MoveAlien2_FimSwitch	; Break do Switch
+			loadn r1, #0
+			store dirAlien2, r1
+
+	  	MoveAlien2_FimSwitch:	
+			store posAlien2, r0	; Grava a posicao alterada na memoria
+			pop r3
+			pop r2
+			pop r1
+			pop r0
+			rts
+
+	;----------------------------------
 	
-	loadi R5, R2	; R5 = Char (Tela(posAnt))
-  
-  MoveAlien2_Apaga_Fim:	
-	outchar R5, R0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
-	
-	pop R5
-	pop R4
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
-
-MoveAlien2_RecalculaPos:
-	push r0
-	push r1
-	push r2
-	push r3
-
-	load r0, posAlien2
-	load r1, dirAlien2
-
- MoveAlien2_Esquerda:
- 	loadn r2, #0	;se dir = 0
-	cmp r1, r2
-	jne MoveAlien2_Baixo
-	loadn r1, #1
-	sub r0, r0, r1
-	loadn r1, #322
-	cmp r0, r1
-	jne MoveAlien2_FimSwitch	; Break do Switch
-	loadn r1, #1
-	store dirAlien2, r1
-	jmp MoveAlien2_FimSwitch
-	
- MoveAlien2_Baixo:
- 	loadn r2, #1	;se dir = 1
-	cmp r1, r2
-	jne MoveAlien2_Direita
-	loadn r1, #40
-	add r0, r0, r1
-	loadn r1, #842
-	cmp r0, r1
-	jne MoveAlien2_FimSwitch	; Break do Switch
-	loadn r1, #2
-	store dirAlien2, r1
-	jmp MoveAlien2_FimSwitch
-	
- MoveAlien2_Direita:
- 	loadn r2, #2	;se dir = 2
-	cmp r1, r2
-	jne MoveAlien2_Cima
-	loadn r1, #1
-	add r0, r0, r1
-	loadn r1, #849
-	cmp r0, r1
-	jne MoveAlien2_FimSwitch	; Break do Switch
-	loadn r1, #3
-	store dirAlien2, r1
-	jmp MoveAlien2_FimSwitch
-	
- MoveAlien2_Cima:
- 	loadn r2, #3	;se dir = 3
-	cmp r1, r2
-	jne MoveAlien2_FimSwitch
-	loadn r1, #40
-	sub r0, r0, r1
-	loadn r1, #329
-	cmp r0, r1
-	jne MoveAlien2_FimSwitch	; Break do Switch
-	loadn r1, #0
-	store dirAlien2, r1
-
-  MoveAlien2_FimSwitch:	
-	store posAlien2, R0	; Grava a posicao alterada na memoria
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
-
+	MoveAlien2_Desenha:
+		push r0
+		push r1
+		
+		Loadn r1, #'A'	; Alien
+		load r0, posAlien2
+		outchar r1, r0
+		store posAntAlien2, r0
+		
+		pop r1
+		pop r0
+		rts
 
 ;----------------------------------
-MoveAlien2_Desenha:
-	push R0
-	push R1
-	
-	Loadn R1, #'A'	; Alien
-	load R0, posAlien2
-	outchar R1, R0
-	store posAntAlien2, R0
-	
-	pop R1
-	pop R0
-	rts
-
+;--------------ALIEN 3-------------
 ;----------------------------------
-;----------------------------------
-;--------------------------
 
 MoveAlien3:
 	push r0
 	push r1
 	
-	call MoveAlien3_RecalculaPos
+	call MoveAlien3_recalculaPos
 	
-; So' Apaga e Redezenha se (pos != posAnt)
-;	If (pos != posAnt)	{	
+	; So Apaga e redesenha se (pos != posAnt)	
+	; if (pos != posAnt)	{	
 	load r0, posAlien3
 	load r1, posAntAlien3
 	cmp r0, r1
 	jeq MoveAlien3_Skip
 		call MoveAlien3_Apaga
 		call MoveAlien3_Desenha		;}
-  MoveAlien3_Skip:
+  	MoveAlien3_Skip:
 	
 	pop r1
 	pop r0
@@ -614,43 +618,43 @@ MoveAlien3:
 ; ----------------------------
 		
 MoveAlien3_Apaga:
-	push R0
-	push R1
-	push R2
-	push R3
-	push R4
-	push R5
+	push r0
+	push r1
+	push r2
+	push r3
+	push r4
+	push r5
 
-	load R0, posAntAlien3	; R0 == posAnt
-	load R1, posAntNave		; R1 = posAnt
+	load r0, posAntAlien3	; r0 == posAnt
+	load r1, posAntNave		; r1 = posAnt
 	cmp r0, r1
 	jne MoveAlien3_Apaga_Skip
 		loadn r5, #'X'		; Se o Tiro passa sobre a Nave, apaga com um X, senao apaga com o cenario 
 		jmp MoveAlien3_Apaga_Fim
 
-  MoveAlien3_Apaga_Skip:	
+  	MoveAlien3_Apaga_Skip:	
   
-	; --> R2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
-	loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
-	add R2, R1, r0	; R2 = Tela1Linha0 + posAnt
-	loadn R4, #40
-	div R3, R0, R4	; R3 = posAnt/40
-	add R2, R2, R3	; R2 = Tela1Linha0 + posAnt + posAnt/40
-	
-	loadi R5, R2	; R5 = Char (Tela(posAnt))
+		; --> r2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
+		loadn r1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+		add r2, r1, r0	; r2 = Tela1Linha0 + posAnt
+		loadn r4, #40
+		div r3, r0, r4	; r3 = posAnt/40
+		add r2, r2, r3	; r2 = Tela1Linha0 + posAnt + posAnt/40
+		
+		loadi r5, r2	; r5 = Char (Tela(posAnt))
   
-  MoveAlien3_Apaga_Fim:	
-	outchar R5, R0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
-	
-	pop R5
-	pop R4
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
+  	MoveAlien3_Apaga_Fim:	
+		outchar r5, r0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
+		
+		pop r5
+		pop r4
+		pop r3
+		pop r2
+		pop r1
+		pop r0
+		rts
 
-MoveAlien3_RecalculaPos:
+MoveAlien3_recalculaPos:
 	push r0
 	push r1
 	push r2
@@ -659,144 +663,145 @@ MoveAlien3_RecalculaPos:
 	load r0, posAlien3
 	load r1, dirAlien3
 
- MoveAlien3_Esquerda:
- 	loadn r2, #0	;se dir = 0
-	cmp r1, r2
-	jne MoveAlien3_Baixo
-	loadn r1, #1
-	sub r0, r0, r1
-	loadn r1, #924
-	cmp r0, r1
-	jne MoveAlien3_FimSwitch	; Break do Switch
-	loadn r1, #1
-	store dirAlien3, r1
-	jmp MoveAlien3_FimSwitch
+ 	MoveAlien3_Esquerda:
+	 	loadn r2, #0	;se dir = 0
+		cmp r1, r2
+		jne MoveAlien3_Baixo
+		loadn r1, #1
+		sub r0, r0, r1
+		loadn r1, #924
+		cmp r0, r1
+		jne MoveAlien3_FimSwitch	; Break do Switch
+		loadn r1, #1
+		store dirAlien3, r1
+		jmp MoveAlien3_FimSwitch
 	
- MoveAlien3_Baixo:
- 	loadn r2, #1	;se dir = 1
-	cmp r1, r2
-	jne MoveAlien3_Direita
-	loadn r1, #40
-	add r0, r0, r1
-	loadn r1, #1124
-	cmp r0, r1
-	jne MoveAlien3_FimSwitch	; Break do Switch
-	loadn r1, #2
-	store dirAlien3, r1
-	jmp MoveAlien3_FimSwitch
+ 	MoveAlien3_Baixo:
+	 	loadn r2, #1	;se dir = 1
+		cmp r1, r2
+		jne MoveAlien3_Direita
+		loadn r1, #40
+		add r0, r0, r1
+		loadn r1, #1124
+		cmp r0, r1
+		jne MoveAlien3_FimSwitch	; Break do Switch
+		loadn r1, #2
+		store dirAlien3, r1
+		jmp MoveAlien3_FimSwitch
 	
- MoveAlien3_Direita:
- 	loadn r2, #2	;se dir = 2
-	cmp r1, r2
-	jne MoveAlien3_Cima
-	loadn r1, #1
-	add r0, r0, r1
-	loadn r1, #1151
-	cmp r0, r1
-	jne MoveAlien3_FimSwitch	; Break do Switch
-	loadn r1, #3
-	store dirAlien3, r1
-	jmp MoveAlien3_FimSwitch
+ 	MoveAlien3_Direita:
+	 	loadn r2, #2	;se dir = 2
+		cmp r1, r2
+		jne MoveAlien3_Cima
+		loadn r1, #1
+		add r0, r0, r1
+		loadn r1, #1151
+		cmp r0, r1
+		jne MoveAlien3_FimSwitch	; Break do Switch
+		loadn r1, #3
+		store dirAlien3, r1
+		jmp MoveAlien3_FimSwitch
 	
- MoveAlien3_Cima:
- 	loadn r2, #3	;se dir = 3
-	cmp r1, r2
-	jne MoveAlien3_FimSwitch
-	loadn r1, #40
-	sub r0, r0, r1
-	loadn r1, #951
-	cmp r0, r1
-	jne MoveAlien3_FimSwitch	; Break do Switch
-	loadn r1, #0
-	store dirAlien3, r1
+ 	MoveAlien3_Cima:
+	 	loadn r2, #3	;se dir = 3
+		cmp r1, r2
+		jne MoveAlien3_FimSwitch
+		loadn r1, #40
+		sub r0, r0, r1
+		loadn r1, #951
+		cmp r0, r1
+		jne MoveAlien3_FimSwitch	; Break do Switch
+		loadn r1, #0
+		store dirAlien3, r1
 
-  MoveAlien3_FimSwitch:	
-	store posAlien3, R0	; Grava a posicao alterada na memoria
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
-
+  	MoveAlien3_FimSwitch:	
+		store posAlien3, r0	; Grava a posicao alterada na memoria
+		pop r3
+		pop r2
+		pop r1
+		pop r0
+		rts
 
 ;----------------------------------
+
 MoveAlien3_Desenha:
-	push R0
-	push R1
+	push r0
+	push r1
 	
-	Loadn R1, #'A'	; Alien
-	load R0, posAlien3
-	outchar R1, R0
-	store posAntAlien3, R0
+	Loadn r1, #'A'	; Alien
+	load r0, posAlien3
+	outchar r1, r0
+	store posAntAlien3, r0
 	
-	pop R1
-	pop R0
+	pop r1
+	pop r0
 	rts
 
 ;----------------------------------
+;-------------ALIEN 4--------------
 ;----------------------------------
-;--------------------------
 
 MoveAlien4:
 	push r0
 	push r1
 	
-	call MoveAlien4_RecalculaPos
+	call MoveAlien4_recalculaPos
 	
-; So' Apaga e Redezenha se (pos != posAnt)
-;	If (pos != posAnt)	{	
+	; So Apaga e redesenha se (pos != posAnt)
+	; if (pos != posAnt)	{	
 	load r0, posAlien4
 	load r1, posAntAlien4
 	cmp r0, r1
 	jeq MoveAlien4_Skip
 		call MoveAlien4_Apaga
 		call MoveAlien4_Desenha		;}
-  MoveAlien4_Skip:
+  	MoveAlien4_Skip:
 	
-	pop r1
-	pop r0
-	rts
-		
+		pop r1
+		pop r0
+		rts
+			
 ; ----------------------------
 		
 MoveAlien4_Apaga:
-	push R0
-	push R1
-	push R2
-	push R3
-	push R4
-	push R5
+	push r0
+	push r1
+	push r2
+	push r3
+	push r4
+	push r5
 
-	load R0, posAntAlien4	; R0 == posAnt
-	load R1, posAntNave		; R1 = posAnt
+	load r0, posAntAlien4	; r0 == posAnt
+	load r1, posAntNave		; r1 = posAnt
 	cmp r0, r1
 	jne MoveAlien4_Apaga_Skip
 		loadn r5, #'X'		; Se o Tiro passa sobre a Nave, apaga com um X, senao apaga com o cenario 
 		jmp MoveAlien4_Apaga_Fim
 
-  MoveAlien4_Apaga_Skip:	
+  	MoveAlien4_Apaga_Skip:	
   
-	; --> R2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
-	loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
-	add R2, R1, r0	; R2 = Tela1Linha0 + posAnt
-	loadn R4, #40
-	div R3, R0, R4	; R3 = posAnt/40
-	add R2, R2, R3	; R2 = Tela1Linha0 + posAnt + posAnt/40
-	
-	loadi R5, R2	; R5 = Char (Tela(posAnt))
+		; --> r2 = Tela1Linha0 + posAnt + posAnt/40  
+		; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
+		loadn r1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+		add r2, r1, r0	; r2 = Tela1Linha0 + posAnt
+		loadn r4, #40
+		div r3, r0, r4	; r3 = posAnt/40
+		add r2, r2, r3	; r2 = Tela1Linha0 + posAnt + posAnt/40
+		
+		loadi r5, r2	; r5 = Char (Tela(posAnt))
   
-  MoveAlien4_Apaga_Fim:	
-	outchar R5, R0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
-	
-	pop R5
-	pop R4
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
+  	MoveAlien4_Apaga_Fim:	
+		outchar r5, r0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
+		
+		pop r5
+		pop r4
+		pop r3
+		pop r2
+		pop r1
+		pop r0
+		rts
 
-MoveAlien4_RecalculaPos:
+MoveAlien4_recalculaPos:
 	push r0
 	push r1
 	push r2
@@ -805,144 +810,145 @@ MoveAlien4_RecalculaPos:
 	load r0, posAlien4
 	load r1, dirAlien4
 
- MoveAlien4_Esquerda:
- 	loadn r2, #0	;se dir = 0
-	cmp r1, r2
-	jne MoveAlien4_Baixo
-	loadn r1, #1
-	sub r0, r0, r1
-	loadn r1, #350
-	cmp r0, r1
-	jne MoveAlien4_FimSwitch	; Break do Switch
-	loadn r1, #1
-	store dirAlien4, r1
-	jmp MoveAlien4_FimSwitch
+ 	MoveAlien4_Esquerda:
+	 	loadn r2, #0	;se dir = 0
+		cmp r1, r2
+		jne MoveAlien4_Baixo
+		loadn r1, #1
+		sub r0, r0, r1
+		loadn r1, #350
+		cmp r0, r1
+		jne MoveAlien4_FimSwitch	; Break do Switch
+		loadn r1, #1
+		store dirAlien4, r1
+		jmp MoveAlien4_FimSwitch
 	
- MoveAlien4_Baixo:
- 	loadn r2, #1	;se dir = 1
-	cmp r1, r2
-	jne MoveAlien4_Direita
-	loadn r1, #40
-	add r0, r0, r1
-	loadn r1, #870
-	cmp r0, r1
-	jne MoveAlien4_FimSwitch	; Break do Switch
-	loadn r1, #2
-	store dirAlien4, r1
-	jmp MoveAlien4_FimSwitch
+ 	MoveAlien4_Baixo:
+	 	loadn r2, #1	;se dir = 1
+		cmp r1, r2
+		jne MoveAlien4_Direita
+		loadn r1, #40
+		add r0, r0, r1
+		loadn r1, #870
+		cmp r0, r1
+		jne MoveAlien4_FimSwitch	; Break do Switch
+		loadn r1, #2
+		store dirAlien4, r1
+		jmp MoveAlien4_FimSwitch
 	
- MoveAlien4_Direita:
- 	loadn r2, #2	;se dir = 2
-	cmp r1, r2
-	jne MoveAlien4_Cima
-	loadn r1, #1
-	add r0, r0, r1
-	loadn r1, #877
-	cmp r0, r1
-	jne MoveAlien4_FimSwitch	; Break do Switch
-	loadn r1, #3
-	store dirAlien4, r1
-	jmp MoveAlien4_FimSwitch
+ 	MoveAlien4_Direita:
+	 	loadn r2, #2	;se dir = 2
+		cmp r1, r2
+		jne MoveAlien4_Cima
+		loadn r1, #1
+		add r0, r0, r1
+		loadn r1, #877
+		cmp r0, r1
+		jne MoveAlien4_FimSwitch	; Break do Switch
+		loadn r1, #3
+		store dirAlien4, r1
+		jmp MoveAlien4_FimSwitch
 	
- MoveAlien4_Cima:
- 	loadn r2, #3	;se dir = 3
-	cmp r1, r2
-	jne MoveAlien4_FimSwitch
-	loadn r1, #40
-	sub r0, r0, r1
-	loadn r1, #357
-	cmp r0, r1
-	jne MoveAlien4_FimSwitch	; Break do Switch
-	loadn r1, #0
-	store dirAlien4, r1
+ 	MoveAlien4_Cima:
+	 	loadn r2, #3	;se dir = 3
+		cmp r1, r2
+		jne MoveAlien4_FimSwitch
+		loadn r1, #40
+		sub r0, r0, r1
+		loadn r1, #357
+		cmp r0, r1
+		jne MoveAlien4_FimSwitch	; Break do Switch
+		loadn r1, #0
+		store dirAlien4, r1
 
-  MoveAlien4_FimSwitch:	
-	store posAlien4, R0	; Grava a posicao alterada na memoria
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
-
+  	MoveAlien4_FimSwitch:	
+		store posAlien4, r0	; Grava a posicao alterada na memoria
+		pop r3
+		pop r2
+		pop r1
+		pop r0
+		rts
 
 ;----------------------------------
+
 MoveAlien4_Desenha:
-	push R0
-	push R1
+	push r0
+	push r1
 	
-	Loadn R1, #'A'	; Alien
-	load R0, posAlien4
-	outchar R1, R0
-	store posAntAlien4, R0
+	Loadn r1, #'A'	; Alien
+	load r0, posAlien4
+	outchar r1, r0
+	store posAntAlien4, r0
 	
-	pop R1
-	pop R0
+	pop r1
+	pop r0
 	rts
 
 ;----------------------------------
+;-------------ALIEN 5--------------
 ;----------------------------------
-;--------------------------
 
 MoveAlien5:
 	push r0
 	push r1
 	
-	call MoveAlien5_RecalculaPos
+	call MoveAlien5_recalculaPos
 	
-; So' Apaga e Redezenha se (pos != posAnt)
-;	If (pos != posAnt)	{	
+	; So Apaga e redezenha se (pos != posAnt)
+	; if (pos != posAnt)	{	
 	load r0, posAlien5
 	load r1, posAntAlien5
 	cmp r0, r1
 	jeq MoveAlien5_Skip
 		call MoveAlien5_Apaga
 		call MoveAlien5_Desenha		;}
-  MoveAlien5_Skip:
+  	MoveAlien5_Skip:
 	
-	pop r1
-	pop r0
-	rts
-		
+		pop r1
+		pop r0
+		rts
+			
 ; ----------------------------
 		
 MoveAlien5_Apaga:
-	push R0
-	push R1
-	push R2
-	push R3
-	push R4
-	push R5
+	push r0
+	push r1
+	push r2
+	push r3
+	push r4
+	push r5
 
-	load R0, posAntAlien5	; R0 == posAnt
-	load R1, posAntNave		; R1 = posAnt
+	load r0, posAntAlien5	; r0 == posAnt
+	load r1, posAntNave		; r1 = posAnt
 	cmp r0, r1
 	jne MoveAlien5_Apaga_Skip
 		loadn r5, #'X'		; Se o Tiro passa sobre a Nave, apaga com um X, senao apaga com o cenario 
 		jmp MoveAlien5_Apaga_Fim
 
-  MoveAlien5_Apaga_Skip:	
+  	MoveAlien5_Apaga_Skip:	
   
-	; --> R2 = Tela1Linha0 + posAnt + posAnt/40  ; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
-	loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
-	add R2, R1, r0	; R2 = Tela1Linha0 + posAnt
-	loadn R4, #40
-	div R3, R0, R4	; R3 = posAnt/40
-	add R2, R2, R3	; R2 = Tela1Linha0 + posAnt + posAnt/40
-	
-	loadi R5, R2	; R5 = Char (Tela(posAnt))
+		; --> r2 = Tela1Linha0 + posAnt + posAnt/40  
+		; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
+		loadn r1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+		add r2, r1, r0	; r2 = Tela1Linha0 + posAnt
+		loadn r4, #40
+		div r3, r0, r4	; r3 = posAnt/40
+		add r2, r2, r3	; r2 = Tela1Linha0 + posAnt + posAnt/40
+		
+		loadi r5, r2	; r5 = Char (Tela(posAnt))
   
-  MoveAlien5_Apaga_Fim:	
-	outchar R5, R0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
-	
-	pop R5
-	pop R4
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
+  	MoveAlien5_Apaga_Fim:	
+		outchar r5, r0	; Apaga o Obj na tela com o Char correspondente na memoria do cenario
+		
+		pop r5
+		pop r4
+		pop r3
+		pop r2
+		pop r1
+		pop r0
+		rts
 
-MoveAlien5_RecalculaPos:
+MoveAlien5_recalculaPos:
 	push r0
 	push r1
 	push r2
@@ -951,110 +957,108 @@ MoveAlien5_RecalculaPos:
 	load r0, posAlien5
 	load r1, dirAlien5
 
- MoveAlien5_Esquerda:
- 	loadn r2, #0	;se dir = 0
-	cmp r1, r2
-	jne MoveAlien5_Baixo
-	loadn r1, #1
-	sub r0, r0, r1
-	loadn r1, #733
-	cmp r0, r1
-	jne MoveAlien5_FimSwitch	; Break do Switch
-	loadn r1, #3
-	store dirAlien5, r1
-	jmp MoveAlien5_FimSwitch
+ 	MoveAlien5_Esquerda:
+	 	loadn r2, #0	;se dir = 0
+		cmp r1, r2
+		jne MoveAlien5_Baixo
+		loadn r1, #1
+		sub r0, r0, r1
+		loadn r1, #733
+		cmp r0, r1
+		jne MoveAlien5_FimSwitch	; Break do Switch
+		loadn r1, #3
+		store dirAlien5, r1
+		jmp MoveAlien5_FimSwitch
 	
- MoveAlien5_Baixo:
- 	loadn r2, #1	;se dir = 1
-	cmp r1, r2
-	jne MoveAlien5_Direita
-	loadn r1, #40
-	add r0, r0, r1
-	loadn r1, #746
-	cmp r0, r1
-	jne MoveAlien5_FimSwitch	; Break do Switch
-	loadn r1, #0
-	store dirAlien5, r1
-	jmp MoveAlien5_FimSwitch
+	 MoveAlien5_Baixo:
+	 	loadn r2, #1	;se dir = 1
+		cmp r1, r2
+		jne MoveAlien5_Direita
+		loadn r1, #40
+		add r0, r0, r1
+		loadn r1, #746
+		cmp r0, r1
+		jne MoveAlien5_FimSwitch	; Break do Switch
+		loadn r1, #0
+		store dirAlien5, r1
+		jmp MoveAlien5_FimSwitch
 	
- MoveAlien5_Direita:
- 	loadn r2, #2	;se dir = 2
-	cmp r1, r2
-	jne MoveAlien5_Cima
-	loadn r1, #1
-	add r0, r0, r1
-	loadn r1, #466
-	cmp r0, r1
-	jne MoveAlien5_FimSwitch	; Break do Switch
-	loadn r1, #1
-	store dirAlien5, r1
-	jmp MoveAlien5_FimSwitch
-	
- MoveAlien5_Cima:
- 	loadn r2, #3	;se dir = 3
-	cmp r1, r2
-	jne MoveAlien5_FimSwitch
-	loadn r1, #40
-	sub r0, r0, r1
-	loadn r1, #453
-	cmp r0, r1
-	jne MoveAlien5_FimSwitch	; Break do Switch
-	loadn r1, #2
-	store dirAlien5, r1
+	 MoveAlien5_Direita:
+	 	loadn r2, #2	;se dir = 2
+		cmp r1, r2
+		jne MoveAlien5_Cima
+		loadn r1, #1
+		add r0, r0, r1
+		loadn r1, #466
+		cmp r0, r1
+		jne MoveAlien5_FimSwitch	; Break do Switch
+		loadn r1, #1
+		store dirAlien5, r1
+		jmp MoveAlien5_FimSwitch
+		
+	 MoveAlien5_Cima:
+	 	loadn r2, #3	;se dir = 3
+		cmp r1, r2
+		jne MoveAlien5_FimSwitch
+		loadn r1, #40
+		sub r0, r0, r1
+		loadn r1, #453
+		cmp r0, r1
+		jne MoveAlien5_FimSwitch	; Break do Switch
+		loadn r1, #2
+		store dirAlien5, r1
 
-  MoveAlien5_FimSwitch:	
-	store posAlien5, R0	; Grava a posicao alterada na memoria
-	pop R3
-	pop R2
-	pop R1
-	pop R0
-	rts
-
+	  MoveAlien5_FimSwitch:	
+		store posAlien5, r0	; Grava a posicao alterada na memoria
+		pop r3
+		pop r2
+		pop r1
+		pop r0
+		rts
 
 ;----------------------------------
+
 MoveAlien5_Desenha:
-	push R0
-	push R1
+	push r0
+	push r1
 	
-	Loadn R1, #'A'	; Alien
-	load R0, posAlien5
-	outchar R1, R0
-	store posAntAlien5, R0
+	Loadn r1, #'A'	; Alien
+	load r0, posAlien5
+	outchar r1, r0
+	store posAntAlien5, r0
 	
-	pop R1
-	pop R0
+	pop r1
+	pop r0
 	rts
 
 ;----------------------------------
+;------------CHECA POS-------------
 ;----------------------------------
-;--------------------------
-
-
 
 ChecaPos:
-	push R0
-	push R1
-	push R2
+	push r0
+	push r1
+	push r2
 	
-	load R0, posNave	; TEsta se o Tiro Pegou no Alien
-	load R1, posAlien
-	cmp R0, R1			; IF posTiro == posAlien  BOOM!!
+	load r0, posNave	; TEsta se o Tiro Pegou no Alien
+	load r1, posAlien
+	cmp r0, r1			; IF posTiro == posAlien  BOOM!!
 	jeq ColisaoNave
 	
-	load R1, posAlien2
-	cmp R0, R1			; IF posTiro == posAlien  BOOM!!
+	load r1, posAlien2
+	cmp r0, r1			; IF posTiro == posAlien  BOOM!!
 	jeq ColisaoNave
 	
-	load R1, posAlien3
-	cmp R0, R1			; IF posTiro == posAlien  BOOM!!
+	load r1, posAlien3
+	cmp r0, r1			; IF posTiro == posAlien  BOOM!!
 	jeq ColisaoNave
 	
-	load R1, posAlien4
-	cmp R0, R1			; IF posTiro == posAlien  BOOM!!
+	load r1, posAlien4
+	cmp r0, r1			; IF posTiro == posAlien  BOOM!!
 	jeq ColisaoNave
 	
-	load R1, posAlien5
-	cmp R0, R1			; IF posTiro == posAlien  BOOM!!
+	load r1, posAlien5
+	cmp r0, r1			; IF posTiro == posAlien  BOOM!!
 	jeq ColisaoNave
 	
 	loadn r1, #1199
@@ -1064,9 +1068,9 @@ ChecaPos:
 
 Vitoria:
 	; Limpa a Tela !!
-  	loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
-	loadn R2, #0  			; cor branca!
-	call ImprimeTela   		;  Rotina de Impresao de Cenario na Tela Inteira
+  	loadn r1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+	loadn r2, #0  			; cor branca!
+	call ImprimeTela   		;  rotina de Impresao de Cenario na Tela Inteira
   
 	;imprime Voce Venceu !!!
 	loadn r0, #526
@@ -1090,11 +1094,11 @@ Vitoria:
 	call ApagaTela
 	jmp main
 
-  ColisaoNave:	
+ ColisaoNave:	
 	; Limpa a Tela !!
-  	loadn R1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
-	loadn R2, #0  			; cor branca!
-	call ImprimeTela   		;  Rotina de Impresao de Cenario na Tela Inteira
+  	loadn r1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+	loadn r2, #0  			; cor branca!
+	call ImprimeTela   		;  rotina de Impresao de Cenario na Tela Inteira
   
 	;imprime Voce Venceu !!!
 	loadn r0, #526
@@ -1125,19 +1129,18 @@ FimChecagem:
 
 	rts
 
- FimJogo:
+FimJogo:
 	call ApagaTela
 	halt
 
-;********************************************************
-;                       DELAY
-;********************************************************		
-
+;-----------------------------------
+;---------------DELAY---------------
+;-----------------------------------
 
 Delay:
-						;Utiliza Push e Pop para nao afetar os Ristradores do programa principal
-	push R0
-	push R1
+	;Utiliza Push e Pop para nao afetar os ristradores do programa principal
+	push r0
+	push r1
 	
 	loadn r1, #5  				; a
    	Delay_volta2:				;Quebrou o contador acima em duas partes (dois loops de decremento)
@@ -1148,21 +1151,19 @@ Delay:
 	dec r1
 	jnz Delay_volta2
 	
-	pop R1
-	pop R0
+	pop r1
+	pop r0
 	
-	rts							;return
+	rts		;return
 
-;-------------------------------
+;-----------------------------------
+;-----------IMPRIME TELA------------
+;-----------------------------------	
 
-
-;********************************************************
-;                       IMPRIME TELA
-;********************************************************	
-
-ImprimeTela: 	;  Rotina de Impresao de Cenario na Tela Inteira
-		;  r1 = endereco onde comeca a primeira linha do Cenario
-		;  r2 = cor do Cenario para ser impresso
+ImprimeTela: 	
+	;  rotina de Impresao de Cenario na Tela Inteira
+	;  r1 = endereco onde comeca a primeira linha do Cenario
+	;  r2 = cor do Cenario para ser impresso
 
 	push r0	; protege o r3 na pilha para ser usado na subrotina
 	push r1	; protege o r1 na pilha para preservar seu valor
@@ -1171,19 +1172,20 @@ ImprimeTela: 	;  Rotina de Impresao de Cenario na Tela Inteira
 	push r4	; protege o r4 na pilha para ser usado na subrotina
 	push r5	; protege o r4 na pilha para ser usado na subrotina
 
-	loadn R0, #0  	; posicao inicial tem que ser o comeco da tela!
-	loadn R3, #40  	; Incremento da posicao da tela!
-	loadn R4, #41  	; incremento do ponteiro das linhas da tela
-	loadn R5, #1200 ; Limite da tela!
+	loadn r0, #0  	; posicao inicial tem que ser o comeco da tela!
+	loadn r3, #40  	; Incremento da posicao da tela!
+	loadn r4, #41  	; incremento do ponteiro das linhas da tela
+	loadn r5, #1200 ; Limite da tela!
 	
    ImprimeTela_Loop:
 		call ImprimeStr
-		add r0, r0, r3  	; incrementaposicao para a segunda linha na tela -->  r0 = R0 + 40
+		add r0, r0, r3  	; incrementaposicao para a segunda linha na tela -->  r0 = r0 + 40
 		add r1, r1, r4  	; incrementa o ponteiro para o comeco da proxima linha na memoria (40 + 1 porcausa do /0 !!) --> r1 = r1 + 41
 		cmp r0, r5			; Compara r0 com 1200
 		jne ImprimeTela_Loop	; Enquanto r0 < 1200
 
-	pop r5	; Resgata os valores dos registradores utilizados na Subrotina da Pilha
+	; resgata os valores dos registradores utilizados na Subrotina da Pilha
+	pop r5	
 	pop r4
 	pop r3
 	pop r2
@@ -1191,14 +1193,14 @@ ImprimeTela: 	;  Rotina de Impresao de Cenario na Tela Inteira
 	pop r0
 	rts
 				
-;---------------------
-
 ;---------------------------	
-;********************************************************
-;                   IMPRIME STRING
-;********************************************************
+;------IMPRIME STRING-------
+;---------------------------
 	
-ImprimeStr:	;  Rotina de Impresao de Mensagens:    r0 = Posicao da tela que o primeiro caractere da mensagem sera' impresso;  r1 = endereco onde comeca a mensagem; r2 = cor da mensagem.   Obs: a mensagem sera' impressa ate' encontrar "/0"
+ImprimeStr:	
+	;  rotina de Impresao de Mensagens:    r0 = Posicao da tela que o primeiro caractere da mensagem sera impresso
+	;  r1 = endereco onde comeca a mensagem
+	; r2 = cor da mensagem.   Obs: a mensagem sera impressa ate encontrar "/0"
 	push r0	; protege o r0 na pilha para preservar seu valor
 	push r1	; protege o r1 na pilha para preservar seu valor
 	push r2	; protege o r1 na pilha para preservar seu valor
@@ -1218,26 +1220,21 @@ ImprimeStr:	;  Rotina de Impresao de Mensagens:    r0 = Posicao da tela que o pr
 		jmp ImprimeStr_Loop
 	
    ImprimeStr_Sai:	
-	pop r4	; Resgata os valores dos registradores utilizados na Subrotina da Pilha
+	pop r4	; resgata os valores dos registradores utilizados na Subrotina da Pilha
 	pop r3
 	pop r2
 	pop r1
 	pop r0
 	rts
 	
-;------------------------	
-	
+;-------------------------------------	
+;-----------IMPRIME TELA 2------------	
+;-------------------------------------	
 
-;-------------------------------
-
-
-;********************************************************
-;                       IMPRIME TELA2
-;********************************************************	
-
-ImprimeTela2: 	;  Rotina de Impresao de Cenario na Tela Inteira
-				;  r1 = endereco onde comeca a primeira linha do Cenario
-				;  r2 = cor do Cenario para ser impresso
+ImprimeTela2: 	
+	;  rotina de Impresao de Cenario na Tela Inteira
+	;  r1 = endereco onde comeca a primeira linha do Cenario
+	;  r2 = cor do Cenario para ser impresso
 
 	push r0	; protege o r3 na pilha para ser usado na subrotina
 	push r1	; protege o r1 na pilha para preservar seu valor
@@ -1247,21 +1244,22 @@ ImprimeTela2: 	;  Rotina de Impresao de Cenario na Tela Inteira
 	push r5	; protege o r5 na pilha para ser usado na subrotina
 	push r6	; protege o r6 na pilha para ser usado na subrotina
 
-	loadn R0, #0  	; posicao inicial tem que ser o comeco da tela!
-	loadn R3, #40  	; Incremento da posicao da tela!
-	loadn R4, #41  	; incremento do ponteiro das linhas da tela
-	loadn R5, #1200 ; Limite da tela!
-	loadn R6, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
+	loadn r0, #0  	; posicao inicial tem que ser o comeco da tela!
+	loadn r3, #40  	; Incremento da posicao da tela!
+	loadn r4, #41  	; incremento do ponteiro das linhas da tela
+	loadn r5, #1200 ; Limite da tela!
+	loadn r6, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
 	
    ImprimeTela2_Loop:
 		call ImprimeStr2
-		add r0, r0, r3  		; incrementaposicao para a segunda linha na tela -->  r0 = R0 + 40
+		add r0, r0, r3  		; incrementaposicao para a segunda linha na tela -->  r0 = r0 + 40
 		add r1, r1, r4  		; incrementa o ponteiro para o comeco da proxima linha na memoria (40 + 1 porcausa do /0 !!) --> r1 = r1 + 41
 		add r6, r6, r4  		; incrementa o ponteiro para o comeco da proxima linha na memoria (40 + 1 porcausa do /0 !!) --> r1 = r1 + 41
 		cmp r0, r5				; Compara r0 com 1200
 		jne ImprimeTela2_Loop	; Enquanto r0 < 1200
 
-	pop r6	; Resgata os valores dos registradores utilizados na Subrotina da Pilha
+	; resgata os valores dos registradores utilizados na Subrotina da Pilha
+	pop r6	
 	pop r5
 	pop r4
 	pop r3
@@ -1270,14 +1268,14 @@ ImprimeTela2: 	;  Rotina de Impresao de Cenario na Tela Inteira
 	pop r0
 	rts
 				
-;---------------------
-
 ;---------------------------	
-;********************************************************
-;                   IMPRIME STRING2
-;********************************************************
+;-----IMPRIME STRING 2------
+;---------------------------
 	
-ImprimeStr2:	;  Rotina de Impresao de Mensagens:    r0 = Posicao da tela que o primeiro caractere da mensagem sera' impresso;  r1 = endereco onde comeca a mensagem; r2 = cor da mensagem.   Obs: a mensagem sera' impressa ate' encontrar "/0"
+ImprimeStr2:	
+	;  rotina de Impresao de Mensagens:    r0 = Posicao da tela que o primeiro caractere da mensagem sera impresso
+	;  r1 = endereco onde comeca a mensagem
+	; r2 = cor da mensagem.   Obs: a mensagem sera impressa ate encontrar "/0"
 	push r0	; protege o r0 na pilha para preservar seu valor
 	push r1	; protege o r1 na pilha para preservar seu valor
 	push r2	; protege o r1 na pilha para preservar seu valor
@@ -1306,7 +1304,8 @@ ImprimeStr2:	;  Rotina de Impresao de Mensagens:    r0 = Posicao da tela que o p
 		jmp ImprimeStr2_Loop
 	
    ImprimeStr2_Sai:	
-	pop r6	; Resgata os valores dos registradores utilizados na Subrotina da Pilha
+   ; resgata os valores dos registradores utilizados na Subrotina da Pilha
+	pop r6	
 	pop r5
 	pop r4
 	pop r3
@@ -1316,12 +1315,12 @@ ImprimeStr2:	;  Rotina de Impresao de Mensagens:    r0 = Posicao da tela que o p
 	rts
 	
 
-;------------------------		
-;********************************************************
-;                   DIGITE UMA LETRA
-;********************************************************
+;-------------------------------------	
+;------------DIGITE LETRA-------------	
+;-------------------------------------
 
-DigLetra:	; Espera que uma tecla seja digitada e salva na variavel global "Letra"
+DigLetra:	
+; Espera que uma tecla seja digitada e salva na variavel global "Letra"
 	push r0
 	push r1
 	loadn r1, #255	; Se nao digitar nada vem 255
@@ -1337,13 +1336,10 @@ DigLetra:	; Espera que uma tecla seja digitada e salva na variavel global "Letra
 	pop r0
 	rts
 
+;-------------------------------------	
+;-------------APAGA TELA--------------
+;-------------------------------------
 
-
-;----------------
-	
-;********************************************************
-;                       APAGA TELA
-;********************************************************
 ApagaTela:
 	push r0
 	push r1
@@ -1351,18 +1347,18 @@ ApagaTela:
 	loadn r0, #1200		; apaga as 1200 posicoes da Tela
 	loadn r1, #' '		; com "espaco"
 	
-	   ApagaTela_Loop:	;;label for(r0=1200;r3>0;r3--)
-		dec r0
-		outchar r1, r0
-		jnz ApagaTela_Loop
+	   	ApagaTela_Loop:	;;label for(r0=1200;r3>0;r3--)
+			dec r0
+			outchar r1, r0
+			jnz ApagaTela_Loop
  
 	pop r1
 	pop r0
 	rts	
 	
 ;------------------------	
-; Declara uma tela vazia para ser preenchida em tempo de execussao:
 
+; Declara uma tela vazia para ser preenchida em tempo de execucao:
 tela0Linha0  : string "                                        "
 tela0Linha1  : string "                                        "
 tela0Linha2  : string "                                        "
@@ -1426,8 +1422,6 @@ tela1Linha27 : string "                                        "
 tela1Linha28 : string "                                        "
 tela1Linha29 : string "                                        "
 
-
-
 ; Declara e preenche tela linha por linha (40 caracteres):
 tela2Linha0  : string "                                        "
 tela2Linha1  : string "                                        "
@@ -1460,7 +1454,6 @@ tela2Linha27 : string "                                        "
 tela2Linha28 : string "                                        "
 tela2Linha29 : string "                                     END"
 
-
 ; Declara e preenche tela linha por linha (40 caracteres):
 tela3Linha0  : string "   |                                    "
 tela3Linha1  : string "   |                                    "
@@ -1492,7 +1485,6 @@ tela3Linha26 : string "                                     ___"
 tela3Linha27 : string "                                    |   "
 tela3Linha28 : string "                                    |   "
 tela3Linha29 : string "                                    |   "
-
 
 ; Declara e preenche tela linha por linha (40 caracteres):
 tela4Linha0  : string "      **********************************"
