@@ -1039,41 +1039,62 @@ ChecaPos:
 	push r0
 	push r1
 	push r2
+	push r3
+	push r4
+	push r5
 	
-	load r0, posNave	; TEsta se o Tiro Pegou no Alien
+	load r0, posNave	; Testa se o Alien pegou a nave
 	load r1, posAlien
-	cmp r0, r1			; IF posTiro == posAlien  BOOM!!
+	cmp r0, r1			; if posNave == posAlien  BOOM!!
 	jeq ColisaoNave
 	
 	load r1, posAlien2
-	cmp r0, r1			; IF posTiro == posAlien  BOOM!!
+	cmp r0, r1			; if posNave == posAlien  BOOM!!
 	jeq ColisaoNave
 	
 	load r1, posAlien3
-	cmp r0, r1			; IF posTiro == posAlien  BOOM!!
+	cmp r0, r1			; if posNave == posAlien  BOOM!!
 	jeq ColisaoNave
 	
 	load r1, posAlien4
-	cmp r0, r1			; IF posTiro == posAlien  BOOM!!
+	cmp r0, r1			; if posNave == posAlien  BOOM!!
 	jeq ColisaoNave
 	
 	load r1, posAlien5
-	cmp r0, r1			; IF posTiro == posAlien  BOOM!!
+	cmp r0, r1			; if posTiro == posAlien  BOOM!!
 	jeq ColisaoNave
+	
+	call ChecaParede
 	
 	loadn r1, #1199
 	cmp r0, r1
 	jeq Vitoria 
 	jmp FimChecagem
+	
+ChecaParede:
+	; --> r2 = Tela1Linha0 + posAnt + posAnt/40  
+	; tem que somar posAnt/40 no ponteiro pois as linas da string terminam com /0 !!
+
+	loadn r1, #tela4Linha0	; Endereco onde comeca a primeira linha do cenario!!
+	add r2, r1, r0			; r2 = Tela1Linha0 + posAnt
+	loadn r4, #40
+	div r3, r0, r4			; r3 = posAnt/40
+	add r2, r2, r3			; r2 = Tela1Linha0 + posAnt + posAnt/40
+	
+	loadi r5, r2			; r5 = Char (Tela(posAnt))
+	loadn r4, #'*'
+	cmp r5, r4 			; if(r5 == '*') BOOM
+	jeq ColisaoNave
+	rts
 
 Vitoria:
 	; Limpa a Tela !!
   	loadn r1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
 	loadn r2, #0  			; cor branca!
-	call ImprimeTela   		;  rotina de Impresao de Cenario na Tela Inteira
+	call ImprimeTela   		; rotina de Impresao de Cenario na Tela Inteira
   
 	;imprime Voce Venceu !!!
-	loadn r0, #526
+	loadn r0, #528
 	loadn r1, #Win
 	loadn r2, #0
 	call ImprimeStr
@@ -1094,14 +1115,14 @@ Vitoria:
 	call ApagaTela
 	jmp main
 
- ColisaoNave:	
+ColisaoNave:	
 	; Limpa a Tela !!
   	loadn r1, #tela0Linha0	; Endereco onde comeca a primeira linha do cenario!!
 	loadn r2, #0  			; cor branca!
-	call ImprimeTela   		;  rotina de Impresao de Cenario na Tela Inteira
+	call ImprimeTela   		; rotina de Impresao de Cenario na Tela Inteira
   
 	;imprime Voce Venceu !!!
-	loadn r0, #526
+	loadn r0, #528
 	loadn r1, #Dead
 	loadn r2, #0
 	call ImprimeStr
@@ -1123,6 +1144,9 @@ Vitoria:
 	jmp main
 	
 FimChecagem:
+	pop r5
+	pop r4
+	pop r3
 	pop r2
 	pop r1
 	pop r0
